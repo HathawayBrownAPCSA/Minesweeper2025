@@ -1,0 +1,57 @@
+
+/**
+ * The Buttons to play Minesweeper
+ *
+ * @author  APCS-A @ HB 2025
+ * @version 2025-05-11
+ */
+
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.Window;
+
+public class MinesweepButton extends JButton
+{
+    private int status;       // options below
+    private int neighBombs;   // -1 if it's a bomb
+
+    public static final int OPEN = 0;
+    public static final int CLOSED = 1;
+    public static final int FLAGGED = 2;
+    
+    /**
+     * Constructor for objects of class MinesweepButton
+     */
+    public MinesweepButton()
+    {
+        status = CLOSED;
+        neighBombs = 0;
+    }
+    
+    // ------------------------------------------------------
+    //   Accessor methods  (getters)
+    // ------------------------------------------------------
+    
+    public int getNeighBombs()
+    {   return neighBombs;  }
+    
+    public int getStatus()
+    {   return status;   }
+    
+    
+    // ------------------------------------------------------
+    //   Mutator methods   (seters)
+    // ------------------------------------------------------
+    
+    /* Set the number of neighboring bombs  */
+    public void setNeighbors (int n)
+    {   neighBombs = n;  }
+    
+    public void setStatus (int s)
+    {  status = s;  }
+
+}
