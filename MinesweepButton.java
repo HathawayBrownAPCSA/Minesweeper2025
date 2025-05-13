@@ -48,7 +48,7 @@ public class MinesweepButton extends JButton
     // ------------------------------------------------------
     
     /* Set the number of neighboring bombs  */
-    public void setNeighbors (int n)
+    public void setNeighBombs (int n)
     {   neighBombs = n;  }
     
     public void setStatus (int s)
