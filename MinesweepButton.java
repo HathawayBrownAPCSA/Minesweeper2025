@@ -18,6 +18,8 @@ public class MinesweepButton extends JButton
 {
     private int status;       // options below
     private int neighBombs;   // -1 if it's a bomb
+    private int row;
+    private int col;
 
     public static final int OPEN = 0;
     public static final int CLOSED = 1;
@@ -32,6 +34,14 @@ public class MinesweepButton extends JButton
         neighBombs = 0;
     }
     
+    public MinesweepButton(int r, int c)
+    {
+        status = CLOSED;
+        neighBombs = 0;
+        row = r;
+        col = c;
+    }
+    
     // ------------------------------------------------------
     //   Accessor methods  (getters)
     // ------------------------------------------------------
@@ -41,6 +51,12 @@ public class MinesweepButton extends JButton
     
     public int getStatus()
     {   return status;   }
+    
+    public int getRow()
+    {   return row;      }
+    
+    public int getCol()
+    {   return col;      }
     
     
     // ------------------------------------------------------

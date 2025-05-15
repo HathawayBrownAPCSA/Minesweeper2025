@@ -29,7 +29,7 @@ public class MinesweepField extends JPanel
         {
             for (int c = 0; c < COLS; c++)
             {
-                MinesweepButton b = new MinesweepButton();
+                MinesweepButton b = new MinesweepButton(r, c);
                 b.setFont(defaultFont);
                 field[r][c] = b;
                 add(b);
@@ -56,7 +56,8 @@ public class MinesweepField extends JPanel
             int r = (int)(Math.random() * ROWS);
             int c = (int)(Math.random() * COLS);
             
-            while (field[r][c].getNeighBombs() == -1)
+            while ((field[r][c].getNeighBombs() == -1) ||
+                   ((Math.abs(r - row) <= 1) && (Math.abs(c - col) <= 1)))
             {
                 r = (int)(Math.random() * ROWS);
                 c = (int)(Math.random() * COLS);
