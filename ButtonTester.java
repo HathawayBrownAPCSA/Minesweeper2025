@@ -1,3 +1,7 @@
+import javax.swing.JPanel;
+import java.awt.GridLayout;
+import java.awt.Dimension;
+import java.awt.Font;
 
 /**
  * Write a description of class ButtonTester here.
@@ -5,24 +9,30 @@
  * @author (your name)
  * @version (a version number or a date)
  */
-public class ButtonTester
+public class MinesweepField extends JPanel
 {
  
     private MinesweepButton [][] field;
+    private Font defaultFont = new Font("Arial", Font.BOLD, 10);
     
     public static int ROWS = 8;
     public static int COLS = 10;
     public static int BOMB_COUNT = 10;
     
-    public ButtonTester()
+    public MinesweepField()
     {
+        super(new GridLayout(ROWS, COLS));
+        super.setPreferredSize(new Dimension(COLS*40,ROWS*40));
         field = new MinesweepButton[ROWS][COLS];
         
         for (int r = 0; r < ROWS; r++)
         {
             for (int c = 0; c < COLS; c++)
             {
-                field[r][c] = new MinesweepButton();
+                MinesweepButton b = new MinesweepButton();
+                b.setFont(defaultFont);
+                field[r][c] = b;
+                add(b);
             }
         }
     }
@@ -89,10 +99,26 @@ public class ButtonTester
         return count;
     }
     
+    public void resetFieldWithSize(int r, int c) {
+        
+    }
+    
+    public int getNumBombs() {
+        return BOMB_COUNT;
+    }
+    
+    public void addMouseListeners(GameDisplay g) {
+        for (MinesweepButton[] r : field) {
+            for (MinesweepButton b : r) {
+                b.addMouseListener(g);
+            }
+        }
+    }
+    
     
     public static void main (String[] args)
     {
-        ButtonTester game = new ButtonTester();
+        MinesweepField game = new MinesweepField();
         
         
         int row = 3;
