@@ -96,14 +96,11 @@ public class GameDisplay extends JFrame implements MouseListener
                     field.setNeighBombs();
                     setYet = true;
                 }
-                b.setStatus(MinesweepButton.OPEN);
+                
                 int nBombs = b.getNeighBombs();
                 if (nBombs == -1) {
                     this.pnum.setText("BOMB EXPLODED :(");
-                } else if (nBombs == 0)  {
-                    openButton(b);
-                    openZero(b.getRow(), b.getCol());
-                }
+                } 
                 else {
                     openButton(b);
                 }
@@ -145,13 +142,31 @@ public class GameDisplay extends JFrame implements MouseListener
 
     public void openZero (int row, int col)
     {
-        
+        for (int r = row - 1; r <= row + 1; r++)  {
+            for (int c = col - 1; c <= col + 1; c++)  {
+                
+                if ((r >= 0 && r < field.getRows()) &&
+                    (c >= 0 && c < field.getCols()))  {
+                        MinesweepButton b = field.getButton(r, c);
+                        if (b.getStatus() != MinesweepButton.OPEN)  {
+                            openButton(b);
+                        }
+                    }
+                    
+            }
+        }
     }
     
     public void openButton (MinesweepButton b)
     {
         b.setBackground(Color.LIGHT_GRAY);
-        b.setText(Integer.toString(b.getNeighBombs()));
+        b.setStatus(MinesweepButton.OPEN);
+        if (b.getNeighBombs() > 0)   {
+            b.setText(Integer.toString(b.getNeighBombs()));
+        }
+        else {
+            openZero(b.getRow(), b.getCol());
+        }
     }
     
     //these 2 will also contain handling for updating the flags-remaining display

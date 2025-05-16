@@ -49,6 +49,16 @@ public class MinesweepField extends JPanel
         }
     }
     
+    public MinesweepButton getButton (int row, int col)
+    {
+        return field[row][col];
+    }
+    
+    public int getRows()
+    {    return ROWS;  }
+    public int getCols()
+    {    return COLS;  }
+    
     public void setBombs(int row, int col)
     {
         for (int b = 1; b <= BOMB_COUNT; b++)
