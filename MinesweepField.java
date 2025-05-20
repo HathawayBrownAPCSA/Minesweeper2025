@@ -13,7 +13,8 @@ public class MinesweepField extends JPanel
 {
  
     private MinesweepButton [][] field;
-    private Font defaultFont = new Font("Arial", Font.BOLD, 10);
+    public static Font defaultFont = new Font("Arial", Font.BOLD, 12);
+    public static Font flagFont = new Font ("Arial", Font.BOLD, 10);
     
     public static int ROWS = 8;
     public static int COLS = 10;

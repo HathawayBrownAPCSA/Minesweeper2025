@@ -68,6 +68,16 @@ public class MinesweepButton extends JButton
     {   neighBombs = n;  }
     
     public void setStatus (int s)
-    {  status = s;  }
+    {  
+        status = s;
+        if (status == FLAGGED)
+        {
+            setFont(MinesweepField.flagFont);
+        }
+        else
+        {
+            setFont(MinesweepField.defaultFont);
+        }
+    }
 
 }

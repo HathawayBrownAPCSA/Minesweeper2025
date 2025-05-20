@@ -45,6 +45,8 @@ public class GameDisplay extends JFrame implements MouseListener
 
         //add label for num flags
         pnum = new JLabel("Flags left: " + numFlags);
+        pnum.setForeground(Color.LIGHT_GRAY);
+        pnum.setFont(new Font ("Arial", Font.BOLD, 20));
         pflag.add(pnum);
         p1.add(pflag);
         pflag.setLocation(0, 0);
@@ -89,7 +91,7 @@ public class GameDisplay extends JFrame implements MouseListener
             MinesweepButton b = (MinesweepButton)e.getSource();
 
             //get button gets the MOUSE button that was pressed, not the JButton
-            if (e.getButton() == 1) {
+            if (e.getButton() == 1) {   // left click
                 if (!setYet)
                 {
                     field.setBombs(b.getRow(), b.getCol());        
@@ -104,7 +106,7 @@ public class GameDisplay extends JFrame implements MouseListener
                 else {
                     openButton(b);
                 }
-
+                
             } else if (e.getButton() == 3) { //right click
                 if (b.getStatus() == 1) {
                     b.setStatus(2);
