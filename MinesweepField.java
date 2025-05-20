@@ -13,8 +13,7 @@ public class MinesweepField extends JPanel
 {
  
     private MinesweepButton [][] field;
-    public static Font defaultFont = new Font("Arial", Font.BOLD, 12);
-    public static Font flagFont = new Font ("Arial", Font.BOLD, 10);
+    private Font defaultFont = new Font("Arial", Font.BOLD, 10);
     
     public static int ROWS = 8;
     public static int COLS = 10;
@@ -62,6 +61,13 @@ public class MinesweepField extends JPanel
     
     public void setBombs(int row, int col)
     {
+        //reset all cells to not have a bomb
+        for (MinesweepButton[] r : field) {
+            for (MinesweepButton b : r) {
+                b.setNeighBombs(0);
+            }
+        }
+        
         for (int b = 1; b <= BOMB_COUNT; b++)
         {
             int r = (int)(Math.random() * ROWS);
@@ -89,7 +95,7 @@ public class MinesweepField extends JPanel
                     field[r][c].setNeighBombs(countNeighBombs(r, c));
                 }
             }
-            System.out.println();
+            // System.out.println();
         }        
     }
     
@@ -127,6 +133,27 @@ public class MinesweepField extends JPanel
         }
     }
     
+    public boolean checkForWin() {
+        for (MinesweepButton[] r : field) {
+            for (MinesweepButton b : r) {
+                //if it isn't a bomb and it's not open, then nobody has won yet
+                if (b.getNeighBombs() != -1 && b.getStatus() != MinesweepButton.OPEN) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    public void resetButtons() {
+        for (MinesweepButton[] r : field) {
+            for (MinesweepButton b : r) {
+                b.setStatus(MinesweepButton.CLOSED);
+                b.setBackground(null);
+                b.setText("");
+            }
+        }
+    }
     
     public static void main (String[] args)
     {

@@ -45,8 +45,6 @@ public class GameDisplay extends JFrame implements MouseListener
 
         //add label for num flags
         pnum = new JLabel("Flags left: " + numFlags);
-        pnum.setForeground(Color.LIGHT_GRAY);
-        pnum.setFont(new Font ("Arial", Font.BOLD, 20));
         pflag.add(pnum);
         p1.add(pflag);
         pflag.setLocation(0, 0);
@@ -91,9 +89,10 @@ public class GameDisplay extends JFrame implements MouseListener
             MinesweepButton b = (MinesweepButton)e.getSource();
 
             //get button gets the MOUSE button that was pressed, not the JButton
-            if (e.getButton() == 1) {   // left click
+            if (e.getButton() == 1) {
                 if (!setYet)
                 {
+                    System.out.println("setting");
                     field.setBombs(b.getRow(), b.getCol());        
                     field.setNeighBombs();
                     setYet = true;
@@ -102,11 +101,12 @@ public class GameDisplay extends JFrame implements MouseListener
                 int nBombs = b.getNeighBombs();
                 if (nBombs == -1) {
                     this.pnum.setText("BOMB EXPLODED :(");
+                    executeGameOver(false);
                 } 
-                else {
+                else if (b.getStatus() == MinesweepButton.CLOSED) {
                     openButton(b);
                 }
-                
+
             } else if (e.getButton() == 3) { //right click
                 if (b.getStatus() == 1) {
                     b.setStatus(2);
@@ -169,6 +169,35 @@ public class GameDisplay extends JFrame implements MouseListener
         else {
             openZero(b.getRow(), b.getCol());
         }
+        
+        if (field.checkForWin()) {
+            executeGameOver(true);
+        }
+    }
+    
+    public void executeGameOver(boolean win) {
+        //System.out.println(win);
+        String msg;
+        if (win) {
+            msg = "Congratulations! You won!";
+        } else {
+            msg = "You lost.";
+        }
+        msg += "\nTime: 35\nPlay again?";
+        int chosen = JOptionPane.showConfirmDialog(null, msg, "End Screen", JOptionPane.YES_NO_OPTION);
+        if (chosen == 0) {
+            resetField();
+        } else {
+            Window parent = SwingUtilities.getWindowAncestor(field);
+            parent.dispose();
+        }
+    }
+    
+    public void resetField() {
+        setYet = false;
+        field.resetButtons();
+        numFlags = field.getNumBombs();
+        updateFlags();
     }
     
     //these 2 will also contain handling for updating the flags-remaining display
