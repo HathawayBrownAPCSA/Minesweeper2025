@@ -45,6 +45,7 @@ public class GameDisplay extends JFrame implements MouseListener
 
         //add label for num flags
         pnum = new JLabel("Flags left: " + numFlags);
+        pnum.setForeground(Color.LIGHT_GRAY);
         pnum.setFont(new Font ("Arial", Font.BOLD, 20));
         pflag.add(pnum);
         p1.add(pflag);
@@ -93,7 +94,7 @@ public class GameDisplay extends JFrame implements MouseListener
             if (e.getButton() == 1) {
                 if (!setYet)
                 {
-                    System.out.println("setting");
+                    // System.out.println("setting");
                     field.setBombs(b.getRow(), b.getCol());        
                     field.setNeighBombs();
                     setYet = true;
