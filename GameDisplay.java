@@ -45,6 +45,7 @@ public class GameDisplay extends JFrame implements MouseListener
 
         //add label for num flags
         pnum = new JLabel("Flags left: " + numFlags);
+        pnum.setFont(new Font ("Arial", Font.BOLD, 20));
         pflag.add(pnum);
         p1.add(pflag);
         pflag.setLocation(0, 0);
