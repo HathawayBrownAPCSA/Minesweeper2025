@@ -160,12 +160,26 @@ public class GameDisplay extends JFrame implements MouseListener
             }
         }
     }
+
+    public Color getColor(int n)
+    {
+        if (n == 1)  {
+            return Color.BLUE;
+        } else if (n == 2)  {
+            return Color.GREEN;
+        } else if (n == 3)  {
+            return Color.RED;
+        } else {
+            return Color.BLACK;
+        }
+    }
     
     public void openButton (MinesweepButton b)
     {
         b.setBackground(Color.LIGHT_GRAY);
         b.setStatus(MinesweepButton.OPEN);
         if (b.getNeighBombs() > 0)   {
+            b.setForeground(getColor(b.getNeighBombs()));
             b.setText(Integer.toString(b.getNeighBombs()));
         }
         else {
